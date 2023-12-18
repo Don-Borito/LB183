@@ -277,3 +277,70 @@ Defensive Programmierung ist eine Herangehensweise in der Softwareentwicklung, d
    - Verwendung sicherer Codierungspraktiken.
 
 Zusammengefasst geht es bei der defensiven Programmierung darum, immer das schlimmste zu erwarten bzw. geht man davon aus, dass alles Böse sein kann. Das Ziel ist so wenig Zugriffe (Angriffsfläche) wie nötig zu erlauben um so viel Sicherheit wie möglich zu gewährleisten.
+
+## Logging
+Ein wichtiger Bestandteil jeder sicheren Applikation ist ein Logging. Dafür gibt es folgende Gründe:
+
+1. **Früherkennung von Angriffen:**
+   - Durch das Protokollieren von Ereignissen können ungewöhnliche Aktivitäten erkannt werden. Dies ermöglicht es, potenzielle Angriffe frühzeitig zu identifizieren und darauf zu reagieren, bevor grösserer Schaden entsteht.
+
+2. **Überwachung und Auditing:**
+   - Durch das Logging können Entwickler und Sicherheitsbeauftragte die Aktivitäten in einer Anwendung überwachen. Dies ermöglicht eine Überprüfung der Zugriffe und Aktionen von Benutzern, was wiederum dazu beiträgt, unbefugte Zugriffe zu verhindern.
+
+3. **Fehlerbehebung und Diagnose:**
+   - Protokolle sind entscheidend für die Fehlerbehebung und Diagnose von Problemen in einer Anwendung. Entwickler können Log-Daten verwenden, um Fehler und Schwachstellen zu identifizieren, die Ursachen zu verstehen und schnell geeignete Massnahmen zu ergreifen.
+
+4. **Sicherheitsüberwachung:**
+   - Die Überwachung von Sicherheitsereignissen über Log-Daten ermöglicht eine proaktive Sicherheitsstrategie. Durch die Analyse von Protokollen können Sicherheitsteams potenzielle Bedrohungen identifizieren und darauf reagieren, bevor sie zu grösseren Sicherheitsproblemen führen.
+
+### Beispiel
+
+Um zu demonstrieren, wie ein guter Log aussieht, habe ich hier ein Beispiel für eine Logzeile bei einem nicht erfolgreichen Login Versuch.
+
+```
+2023-08-28T14:54:37Z M183.Controllers.LoginController: Warning: login attempt failed for user 'administrator'. Access denied.
+```
+
+Enthalten sind:
+Zeitpunkt `2023-08-28T14:54:37Z`
+Ort in der Applikation `M183.Controllers.LoginController`
+Ereignis `Warning: login attempt failed for user`
+betroffener Nutzer `'administrator'`
+Resultat `Access denied.`
+
+Implementiert wird das folgendermassen:
+
+Logger Konfiguration zu Programm.cs hinzufügen:
+
+```csharp
+builder.Host.ConfigureLogging(logging =>
+{
+ logging.ClearProviders();
+ logging.AddConsole(); // Console Output
+ logging.AddDebug(); // Debugging Console Output
+});
+```
+
+Dem LoginController einen ILogger hinzufügen
+```csharp
+public LoginController(ILogger<LoginController> logger, NewsAppContext context, IConfiguration configuration)
+        {
+            _logger = logger;
+            _context = context;
+            _configuration = configuration;
+        }
+```
+
+Nach einem Login Versuch die passende Log-Nachricht hinzufügen.
+
+```csharp
+if (user == null)
+            {
+                _logger.LogWarning($"login failed for user '{request.Username}'");
+                return Unauthorized("login failed");
+            }
+
+            _logger.LogInformation($"login successful for user '{request.Username}'");
+            return Ok(CreateToken(user));
+```
+
