@@ -236,3 +236,44 @@ Insgesamt generiert dieser Code also einen JWT-Token, der die Identität und ggf
 Die Autorisierung in der App-Entwicklung bezieht sich auf den Prozess der Identifizierung und Überprüfung von Benutzern, um sicherzustellen, dass sie die erforderlichen Berechtigungen haben, auf bestimmte Ressourcen oder Funktionen der Anwendung zuzugreifen. Dieser Prozess ist entscheidend, um die Sicherheit der Anwendung zu gewährleisten und den unbefugten Zugriff auf sensible Daten zu verhindern. Die Autorisierung kann bei einer Server Anfrage zum Beispiel durch den beim Login erstellten JWT-Token erfolgen.
 
 
+## Defensives Programmieren
+Defensive Programmierung ist eine Herangehensweise in der Softwareentwicklung, die darauf abzielt, die Sicherheit und Robustheit von Software zu gewährleisten. Hier sind einige grundlegende Aspekte, die beachtet werden sollten:
+
+1. **Schichtenmodell:**
+   - Aufbau von Software in verschiedenen Schichten.
+   - Jede Schicht hat spezifische Funktionen und Schnittstellen.
+   - Isolierung von Funktionen zur besseren Wartbarkeit und Sicherheit.
+
+2. **Risikoabschätzung:**
+   - Identifikation potenzieller Sicherheitsrisiken.
+   - Bewertung der Wahrscheinlichkeit und Auswirkungen dieser Risiken.
+
+3. **Authentifizierung und Autorisierung:**
+   - Gewährleistung, dass nur berechtigte Benutzer auf bestimmte Funktionen oder Daten zugreifen können.
+   - Überprüfung der Identität von Benutzern.
+
+4. **Verwendung von APIs und Bibliotheken:**
+   - Auswahl vertrauenswürdiger und sicherer APIs und Bibliotheken.
+   - Regelmäßige Aktualisierung, um Sicherheitslücken zu schließen.
+
+5. **Sicherheitsbewusstsein:**
+   - Sensibilisierung für Sicherheitsfragen während des gesamten Entwicklungsprozesses.
+   - Schulung der Entwickler für bewusste Entscheidungen im Hinblick auf Sicherheit.
+
+6. **Eingabe- und Ausgabevalidierung:**
+   - Überprüfung und Filterung von Benutzereingaben, um Angriffe wie Injection zu verhindern.
+   - Sicherstellen, dass ausgegebene Daten korrekt formatiert und sicher sind.
+
+7. **Session-Management:**
+   - Sichere Verwaltung von Benutzersitzungen.
+   - Schutz vor Session-Hijacking und Session-Fixation.
+
+8. **Errorhandling und Logging:**
+   - Robuste Fehlerbehandlung, um sicherzustellen, dass die Software bei unerwarteten Ereignissen stabil bleibt.
+   - Protokollierung von Fehlern für die spätere Analyse und Fehlerbehebung.
+
+9. **Implementierung:**
+   - Sorgfältige Umsetzung der defensiven Programmierungskonzepte.
+   - Verwendung sicherer Codierungspraktiken.
+
+Zusammengefasst geht es bei der defensiven Programmierung darum, immer das schlimmste zu erwarten bzw. geht man davon aus, dass alles Böse sein kann. Das Ziel ist so wenig Zugriffe (Angriffsfläche) wie nötig zu erlauben um so viel Sicherheit wie möglich zu gewährleisten.
