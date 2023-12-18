@@ -1,7 +1,10 @@
 
+
 # Cybersecurity
 
-Dieses Portfolio dient dazu mein wissen zu Cybersecurity weiter zu geben. Das Portfolio basiert auf dem wissen, dass ich im **Modul 183 Applikationssicherheit** implementieren erlernt habe.
+Dieses Portfolio dient dazu mein wissen zu Cybersecurity weiter zu geben. Das Portfolio basiert auf dem wissen, dass ich im **Modul 183 Applikationssicherheit** implementieren erlernt habe. 
+Ich möchte auf aktuelle kritische Bedrohungen eingehen, anhand von einem Beispiel zu Injecton erklären wie man Sicherheitslücken findet und behebt. Ich werde zeigen wie man mit JWT-Token die Authentifizierung verbessern kann und wie Authentifizierung und Autorisierung helfen die Applikationssicherheit zu verbessern.
+Ebenfalls möchte ich den Sinn von defensivem Programmieren erklären und zum Schluss werde ich erläutern, was Logging für die Sicherheit bringt und wie es Implementiert werden kann.
 
 ## Aktuelle Bedrohungen
 Um seine eigene Applikation zu schützen, muss man wissen, welche Bedrohungen existieren. Deshalb möchte ich kurz die am weitesten verbreiteten vorstellen. Ich werde nur die aktuell kritischsten Methoden erklären, basierend auf der Top Ten Liste von [OWASP](https://owasp.org/www-project-top-ten/). Bei OWASP gibt es ebenfalls Anleitungen, wie man gegen diese potenziellen Sicherheitslücken vorgehen kann.
@@ -73,6 +76,15 @@ Injection bezeichnet eine Sicherheitslücke, bei der unerwünschter Code in eine
 6. **Verwendung von Web Application Firewalls (WAF):**
    - Implementiere Web Application Firewalls, um verdächtigen Datenverkehr zu überwachen und Angriffsversuche auf Injection zu erkennen und zu blockieren.
 
+### Verifizierung Handlungsziel 1
+Aktuelle Bedrohungen erkennen und erläutern können. Aktuelle Informationen zum Thema (Erkennung und Gegenmassnahmen) beschaffen und mögliche Auswirkungen aufzeigen und erklären können.
+**Erreicht**:  Ich habe eine Liste von aktuellen kritischen Bedrohungen erstellt, basierend auf der Top Ten Liste von OWASP. Auf dieser Seite können ebenfalls weitere Informationen beschaffen werden können.
+
+### Beurteilung Umsetzung
+Ich denke das Artefakt ist gut umgesetzt da ich mir Informationen zu einigen Bedrohungen und dessen Verhinderung beschafft habe. Ich habe auch gezeigt wie ich falls nötig weitere Informationen suchen würde. 
+Ich habe bei meinem Artefakt nicht viel bis nichts zu den möglichen Auswirkungen geschrieben, da es meistens darauf zurückgeht dass Personen an Daten gelangen können, auf die sie keinen Zugriff haben.
+
+
 ## Sicherheitslücken einer Applikation erkennen
 ```csharp
 public ActionResult<User> Login(LoginDto request)
@@ -133,6 +145,13 @@ Hier noch zwei Vorteile der LINQ-Abfragen gegenüber direkten SQL Abfragen:
 **Parameterisierung von Abfragen:** LINQ-Abfragen werden oft als parametrisierte Abfragen erstellt, bei denen Werte als Parameter übergeben werden, anstatt sie direkt in die Abfrage einzubetten. Dies reduziert das Risiko von SQL-Injections erheblich, da Benutzereingaben nicht direkt in die SQL-Abfrage eingefügt werden.
 
 **Automatische Escapen von Zeichen:** LINQ-to-SQL- oder Entity Framework-Anbieter handhaben oft das Escapen von Sonderzeichen automatisch. Dies hilft, potenziell schädliche Zeichen zu neutralisieren, was das Risiko von SQL-Injections weiter minimiert.
+
+### Verifizierung Handlungsziel 2
+Sicherheitslücken und ihre Ursachen in einer Applikation erkennen können. Gegenmassnahmen vorschlagen und implementieren können.
+**Erreicht**:  Ich habe anhand von einem Beispiel eine Sicherheitslücke gezeigt und eine mögliche Gegenmassnahme mit Implementierung aufgezeigt.
+
+### Beurteilung Umsetzung
+Ich denke mein Artefakt ist sehr gut umgesetzt, da es eine Implementation mit Sicherheitslücke zeigt, und wie man es verbessern/lösen kann. Das Artefakt zeigt natürlich nur wie es bei Injection aussehen kann obwohl es noch viele andere potentielle Sicherheitslücken gibt. Da es aber in meinen Augen wichtig ist Injection zu verhindern und ich nicht jede Sicherheitslücke in dem Artefakt zu zeigen reicht das.
 
 ## Mechanismen für die Authentifizierung und Autorisierung umsetzen können
 
@@ -235,6 +254,13 @@ Insgesamt generiert dieser Code also einen JWT-Token, der die Identität und ggf
 
 Die Autorisierung in der App-Entwicklung bezieht sich auf den Prozess der Identifizierung und Überprüfung von Benutzern, um sicherzustellen, dass sie die erforderlichen Berechtigungen haben, auf bestimmte Ressourcen oder Funktionen der Anwendung zuzugreifen. Dieser Prozess ist entscheidend, um die Sicherheit der Anwendung zu gewährleisten und den unbefugten Zugriff auf sensible Daten zu verhindern. Die Autorisierung kann bei einer Server Anfrage zum Beispiel durch den beim Login erstellten JWT-Token erfolgen.
 
+### Verifizierung Handlungsziel 3
+Mechanismen für die Authentifizierung und Autorisierung umsetzen können.
+**Teilweise Erreicht**:  Ich habe anhand von einem Beispiel wie Authentifizierung umgesetzt werden kann, bei Autorisierung habe ich nicht gezeigt wie es umgesetzt wird.
+
+### Beurteilung Umsetzung
+Das Artefakt ist genügend umgesetzt, da ich zwar mit dem JWT-Token gut erklärt habe wie man Autentifizierung sicher umsetzen kann. Aber ich habe nicht gezeigt wie man Autorisierung sicher umsetzen kann. Ein Beispiel dafür, dass jedesmal bei einem Server Request der JWT-Token mitgesendet wird, indem die Benutzerrolle wie Administrator oder Benutzer steht. Beim Server wird dann kontrolliert welche Rolle die Person hat und ob die Aktion mit dieser Rolle erlaubt ist. Das ist sehr sicher, da alle Informationen in JWT-Token gehasht sind nicht gefälscht werden können.
+
 
 ## Defensives Programmieren
 Defensive Programmierung ist eine Herangehensweise in der Softwareentwicklung, die darauf abzielt, die Sicherheit und Robustheit von Software zu gewährleisten. Hier sind einige grundlegende Aspekte, die beachtet werden sollten:
@@ -277,6 +303,13 @@ Defensive Programmierung ist eine Herangehensweise in der Softwareentwicklung, d
    - Verwendung sicherer Codierungspraktiken.
 
 Zusammengefasst geht es bei der defensiven Programmierung darum, immer das schlimmste zu erwarten bzw. geht man davon aus, dass alles Böse sein kann. Das Ziel ist so wenig Zugriffe (Angriffsfläche) wie nötig zu erlauben um so viel Sicherheit wie möglich zu gewährleisten.
+
+### Verifizierung Handlungsziel 4
+Sicherheitsrelevante Aspekte bei Entwurf, Implementierung und Inbetriebnahme berücksichtigen.
+**Erreicht**: Ich habe die deffensive Programmierung erklärt, was es ist und wie es zur Sicherheit beiträgt. Darin sind viel Sicherheitsrelevanten Aspekte enthalten.
+
+### Beurteilung Umsetzung
+Das Artefakt ist gut umgesetzt. Eine Erklärung zur deffensiven Programmierung und eine kurze Liste mit den zugehörigen Teilen deckt in meinen Augen das nötige ab. Es ist erneut schwierig das Artefakt perfekt zu gestalten, da es sehr viele kleine weniger wichtige Aspekte gibt, die man beachten sollte. Aber alles in allem ist die deffensive Programierung ein gutes Grundkonzept.
 
 ## Logging
 Ein wichtiger Bestandteil jeder sicheren Applikation ist ein Logging. Dafür gibt es folgende Gründe:
@@ -343,4 +376,12 @@ if (user == null)
             _logger.LogInformation($"login successful for user '{request.Username}'");
             return Ok(CreateToken(user));
 ```
+### Verifizierung Handlungsziel 5
+Informationen für Auditing und Logging generieren. Auswertungen und Alarme definieren und implementieren.
+**Erreicht**: Ich habe anhand von einem Beispiel beschrieben wie eine sinvolle Log-Nachticht aussieht und wie man sie implementieren kann. Ich habe auch beschrieben warum Logging wichtig ist für die Sicherheit
 
+### Beurteilung Umsetzung
+Das Artefakt ist sehr gut umgesetzt. Es zeigt eine der wahrscheinlich am häufigsten gebrauchten Log-Nachrichten. Die Liste warum Logging wichtig für die Sicherheit einer Applikation ist wäre nicht nötig gewesen um das Handlungsziel zu erreichen, ich fand es aber wichtig damit das Thema vollständig ist und Sinn macht.
+
+## Selbsteinschätzung
+Ich denke ich habe die meisten Kompetenzen im Modul erreicht, ich habe auf jedenfall der Hintergrund zu den Sicherheitsaspekten verstanden und weiss bei den meisten auch wie sie umzusetzen sind. Und bei denen die ich nicht genau weiss wie umsetzen, weiss ich wo ich Informationen finde. Ich fand es im gesamten schwierig den Unterschied oder die Unterkategorien verschiedener Sicherheitsaspekte zu erkennen da alle sehr nah zusammenhangen, das hat das Modul für mich ein wenig anspruchsvoller gemacht.
